@@ -2,7 +2,7 @@
 	"name": "dmetri333/db-query-builder",
     "autoload": {
         "psr-0" : {
-            "queryBuilder" : "src"
+            "queryBuilder" : "src/"
         }
     }
 }
