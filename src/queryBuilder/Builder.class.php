@@ -443,6 +443,18 @@ class Builder {
 	
 	/**
 	 * 
+	 * @param string $keyColumn
+	 * @param string $valueColumn
+	 */
+	public function fetchKeyValuePair($keyColumn, $valueColumn) {
+	
+		$this->columns = [$keyColumn, $valueColumn];
+	
+		return $this->db->fetchRows($this->toSql(), $this->getBindings(), PDO::FETCH_KEY_PAIR);
+	}
+	
+	/**
+	 * 
 	 * @param unknown $instance
 	 */
 	public function fetchObject($instance) {
