@@ -15,7 +15,7 @@ class DB {
 	 */
 	public function __construct(array $config) {
 		$this->config = $config;
-		$this->connect($config['protocol'], $config['username'], $config['password'], $config['url'], $config['name']);
+		$this->connect($config['protocol'], $config['username'], $config['password'], $config['url'], $config['name'], $config['port']);
 	}
 	
 	/**
@@ -41,15 +41,17 @@ class DB {
 	 *
 	 * @param string $protocol
 	 * @param string $user
+	 * @param string $password
 	 * @param string $url
-	 * @param string $database
+	 * @param string $name
+	 * @param int $port
 	 * @return /PDO
 	 */
-	public function connect($protocol, $user, $password, $url, $name) {
+	public function connect($protocol, $user, $password, $url, $name, $port = 3306) {
 		$pdo = null;
 		try {
 			$options = array(PDO::ATTR_PERSISTENT => true);
-			$pdo = new PDO("{$protocol}:host={$url};dbname={$name}", $user, $password, $options);
+			$pdo = new PDO("{$protocol}:host={$url};port={$port};dbname={$name}", $user, $password, $options);
 			$pdo->exec('SET NAMES utf8');
 		} catch (PDOException $e) {
 			$pdo = null;
